@@ -1,0 +1,1 @@
+Goal of this project is to create a calculator that takes in click and key events and performs operations on what the user selects.
