@@ -7,6 +7,11 @@ html, body {
 
 #container {
     display: flex;
+    height: 95%;
+    width: 500px;	
+    margin: auto;
+    margin-top: 80px;
+
     justify-content: center;
     flex-direction: column;
     flex-wrap: wrap;
@@ -14,5 +19,5 @@ html, body {
 
 #display {
     border: 2px black solid;
+    padding: 7px;
 }
-
