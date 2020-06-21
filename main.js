@@ -21,13 +21,13 @@ function divide(x,y) {
 
 //operate function that takes an operator and 2 numbers and calls one of the above functions
 function operate(operator, x, y) {
-    if (operator === 'add'){
+    if (operator === '+'){
         return add(x,y);
     }
-    else if (operator === 'subtract') {
+    else if (operator === '-') {
         return subtract(x,y);
     }
-    else if (operator === 'multiply') {
+    else if (operator === '*') {
         return multiply(x,y);
     }
     else {
@@ -53,3 +53,13 @@ document.addEventListener('DOMContentLoaded', () =>
 
 
 // store first Number that is input into the calculator when a user presses an operator
+// idea: add event listener to the operator buttons, when clicked, save current display as first val
+// also save the operator chosen
+
+
+// clear button 
+document.addEventListener('DOMContentLoaded', () =>    
+    {document.querySelector('.clear').addEventListener('click', function () {
+        document.getElementById('display').innerText = ""
+        display = ""
+    })});
