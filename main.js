@@ -55,41 +55,54 @@ function getDisplayValue () {
 
 //create an object literal to save and update numbers entered by user
 let calculation = {
-    firstNum: 0,
-    secondNum: 0,
-    operator: ""
+    numbers: [],
+    operators: []
 };
 
-// stores first number that is input in the calculator when a user presses an operator
-document.addEventListener('DOMContentLoaded', () =>
-{document.querySelectorAll('.operator').forEach(operand => {operand.onclick = function () {
-        calculation["firstNum"] = display;
-        calculation["operator"] = operand.innerText; 
-        getSecondNum();
-        }})}
-);
 
 
-//grabs second number when equals function/key is ran
-function getSecondNum() {
-    let display = ""
-    document.getElementById('display').innerText = display;
-    getDisplayValue();
-    equals();
 
-}
+// // stores first number that is input in the calculator when a user presses an operator
+function storeInput () {
+    document.querySelectorAll('.operator').forEach(operand => {operand.onclick = function () {
+        calculation["numbers"].push(display);
+        calculation["operators"].push(operand.innerText);
+        display = "";
+        document.getElementById('display').innerText = "";
+        getDisplayValue();
+        }})
+    };
+
+
+
+// iterates over the two arrays in the calculation object, returns total
+function calculateTotal (numArray, operatorArray) {
+    let total = operate(operatorArray[0], numArray[0], numArray[1]);
+
+    if (numArray.length > 2) {
+        for (i= 2; i< numArray.length; i++) {
+            total = operate(operatorArray[i-1], total, numArray[i])
+        }
+    }
+    else {
+        return total;
+    }
+    return total;
+    };
+
+
 
 //execute Functions when users presses the "=" key
 function equals () {
-    document.querySelectorAll('.operator').forEach(operand => {operand.onclick = function () 
-        { if (operand.innerText === "=") {
-            calculation["secondNum"] = display;
-            document.getElementById('display').innerText = (operate(calculation["operator"], calculation["firstNum"], calculation["secondNum"]));
+    document.querySelector('#equals').addEventListener('click', function () {
+        console.log(calculateTotal(calculation["numbers"], calculation["operators"]));
         }
-        }
-    }
-    )
-};
+      )};
+
+           
+
+    
+
 
 
 // clear button 
@@ -101,3 +114,5 @@ document.addEventListener('DOMContentLoaded', () =>
 
 
 getDisplayValue();
+document.addEventListener('DOMContentLoaded', storeInput);
+document.addEventListener('DOMContentLoaded', equals);
