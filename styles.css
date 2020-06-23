@@ -7,17 +7,34 @@ html, body {
 
 #container {
     display: flex;
-    height: 95%;
-    width: 500px;	
+    height: 50vh;	
     margin: auto;
     margin-top: 80px;
 
-    justify-content: center;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
+
 }
 
 #display {
     border: 2px black solid;
-    padding: 7px;
+    flex-basis: 100%;
+    justify-content: stretch;
+}
+
+button {
+    flex-basis: 25%;
+    justify-content: stretch;
+}
+
+.buttons {
+    background-color: grey;
+    font-size: 25px;
+    color: white;
+}
+
+.operator, .clear {
+    background-color: orange;
+    font-size: 25px;
+    color: white;
 }
