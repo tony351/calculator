@@ -20,6 +20,7 @@ html, body {
     border: 2px black solid;
     flex-basis: 100%;
     justify-content: stretch;
+    font-size: 50px;
 }
 
 button {
@@ -33,7 +34,7 @@ button {
     color: white;
 }
 
-.operator, .clear {
+.operator, #clear, #equals {
     background-color: orange;
     font-size: 25px;
     color: white;

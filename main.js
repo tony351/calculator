@@ -60,15 +60,23 @@ let calculation = {
 };
 
 
+// NOTE: Next steps, show total in display after each order of operation when chaining numbers
+// We are only showing the total when we hit enter
+// May need to refactor the getdisplayvalue fucntion and create new function that takes in calclation
+// need to change font size of display value
+
+// Then work on bugs and edge cases
+// add event listeners for data keys
+// refactor clear function to wipe out existing data
 
 
-// // stores first number that is input in the calculator when a user presses an operator
+// // stores numbers that is input in the calculator when a user presses an operator
 function storeInput () {
     document.querySelectorAll('.operator').forEach(operand => {operand.onclick = function () {
         calculation["numbers"].push(display);
         calculation["operators"].push(operand.innerText);
         display = "";
-        document.getElementById('display').innerText = "";
+        document.getElementById('display').innerText = ""
         getDisplayValue();
         }})
     };
@@ -81,13 +89,13 @@ function calculateTotal (numArray, operatorArray) {
 
     if (numArray.length > 2) {
         for (i= 2; i< numArray.length; i++) {
-            total = operate(operatorArray[i-1], total, numArray[i])
+            total = operate(operatorArray[i-1], total, numArray[i])  
         }
     }
     else {
-        return total;
+        document.getElementById('display').innerText = total;
     }
-    return total;
+    document.getElementById('display').innerText =  total;
     };
 
 
@@ -95,19 +103,18 @@ function calculateTotal (numArray, operatorArray) {
 //execute Functions when users presses the "=" key
 function equals () {
     document.querySelector('#equals').addEventListener('click', function () {
-        console.log(calculateTotal(calculation["numbers"], calculation["operators"]));
+        return (calculateTotal(calculation["numbers"], calculation["operators"]));
         }
       )};
 
-           
-
-    
+ 
 
 
 
 // clear button 
+// **also need to clear out the dictionary
 document.addEventListener('DOMContentLoaded', () =>    
-    {document.querySelector('.clear').addEventListener('click', function () {
+    {document.querySelector('#clear').addEventListener('click', function () {
         document.getElementById('display').innerText = ""
         display = ""
     })});
