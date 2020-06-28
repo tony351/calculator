@@ -118,10 +118,19 @@ function currentTotal (numArray,operatorArray) {
 
 //execute Functions when users presses the "=" key
 function equals () {
-    document.querySelector('#equals').addEventListener('click', function () {
-        display = (calculateTotal(calculation["numbers"], calculation["operators"]))
-        document.getElementById('display').innerText = display
-        })
+    // if equals is clicked when theres nothing in display aka first thing
+        document.querySelector('#equals').addEventListener('click', function () {
+            if (display === "") {
+                document.getElementById('display').innerText = ""
+                // when spamming = when display is empty, it will return NaN because it's adding
+                // "" and "=" into the arrays in the object. popping them out will stop this issue
+                calculation["numbers"].pop()
+                calculation["operators"].pop()
+            }           
+            else {
+                display = (calculateTotal(calculation["numbers"], calculation["operators"]))
+                document.getElementById('display').innerText = display}
+            }) 
     };
 
  // iterates over the two arrays in the calculation object, returns total
