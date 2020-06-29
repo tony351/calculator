@@ -50,32 +50,37 @@ let display = ""
 // Add event listener to all the buttons
 function getDisplayValue () {
             //document.getElementById('display').innerText = ""
-            // document.getElementById('display').innerText = display
-            
+             //document.getElementById('display').innerText = display
             document.querySelectorAll('.buttons').forEach(button => {button.onclick = function () {           
-            // continue to add numbers to the display screen
+            // continue to add numbers to the display screen 
             document.getElementById('display').innerText +=  button.value;
-            // adds display screen string to display variable, then convert to int
+                // adds display screen string to display variable, then convert to int
             display = parseInt(document.getElementById('display').innerText)
         }
     });
     };
 
-//resetDisplay will be called in storeInput(). This helps with clearing and reentering input when chaining operators
-function resetDisplay () {
+
+//reenterDisplay will be called in storeInput(). This helps with clearing and reentering input when chaining operators
+function reenterDisplay () {
+        newInput = ""
     document.querySelectorAll('.buttons').forEach(button => {button.onclick = function () {
-        document.getElementById('display').innerText = ""
-        display = "";
-        document.getElementById('display').innerText +=  button.value;
-            // adds display screen string to display variable, then convert to int
-        display = parseInt(document.getElementById('display').innerText)
-}})}
+            // document.getElementById('display').innerText = ""
+            // display = ""
+            newInput += button.value;
+            //document.getElementById('display').innerText +=  button.value;
+            document.getElementById('display').innerText = newInput
+            display = parseInt(document.getElementById('display').innerText)
+    }}
+    )
+    }
+
 
 
 
 // Then work on bugs and edge cases
 // add event listeners for data keys
-// refactor clear function to wipe out existing data
+
 
 
 // // stores numbers that is input in the calculator when a user presses an operator
@@ -83,11 +88,12 @@ function storeInput () {
     document.querySelectorAll('.operator').forEach(operand => {operand.onclick = function () {
         calculation["numbers"].push(display);
         calculation["operators"].push(operand.innerText);
-        //display = ""
-        //document.getElementById('display').innerText = ""
         currentTotal(calculation["numbers"], calculation["operators"])
-        resetDisplay();
-        }})
+        reenterDisplay();
+        }
+    }
+    )
+    //getDisplayValue();
     };
 
 
@@ -99,18 +105,12 @@ function currentTotal (numArray,operatorArray) {
         display = calculation["equationTotal"]
     }
     else if (operatorArray.length > 2) {
-        calculation["equationTotal"] = 0 //reset counter, then iterate
-        for (i= 0; i< operatorArray.length; i++) {
-            calculation["equationTotal"] = operate(operatorArray[i], calculation["equationTotal"], numArray[i])
-            
-            //display = calculation["equationTotal"]
+        for (i= operatorArray.length - 1; i< operatorArray.length; i++) {
+            calculation["equationTotal"] = operate(operatorArray[i-1], calculation["equationTotal"], numArray[i])          
     }
     document.getElementById('display').innerText = calculation["equationTotal"]
 }
     else {
-        // calculation["equationTotal"] = operate(calculation["operators"][0], 0, calculation["numbers"][0])
-        // document.getElementById('display').innerText = calculation["equationTotal"]
-        // display = calculation["equationTotal"]
          document.getElementById('display').innerText = display
     }
 }
